@@ -27,7 +27,6 @@ pipeline {
             post {
                 always {
                     junit 'coverage/lcov-report/*.js'
-'
                 }
             }
 
