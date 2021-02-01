@@ -1,6 +1,9 @@
 #!/usr/bin/env groovy
 pipeline {
     agent any
+    tools {
+        node 'v14.15.4'
+    }
 
     stages {
         stage('Dependencias') {
