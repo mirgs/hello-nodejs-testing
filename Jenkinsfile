@@ -13,10 +13,32 @@ pipeline {
             steps {
                 sh 'yarn run test'
             }
+            post {
+                always {
+                    junit 'coverage/*.xml'
+                }
+            }
+
         }
         stage('ci-test') {
             steps {
                 sh 'yarn run ci-test'
+            }
+            post {
+                always {
+                    junit 'coverage/*.xml'
+                }
+            }
+
+        }
+        stage('Build-jacoco') {
+            steps {
+                step([$class: 'JacocoPublisher', 
+                    execPattern: 'build/jacoco/*.exec',
+                    classPattern: 'build/classes',
+                    sourcePattern: 'src/main/java',
+                    exclusionPattern: 'src/test*'
+                    ])
             }
         }
         
