@@ -2,7 +2,7 @@
 pipeline {
     agent any
     tools {
-        node 'v14.15.4'
+        node: 'v14.15.4'
     }
 
     stages {
