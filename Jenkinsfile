@@ -11,22 +11,24 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh 'yarn run test'
+                sh 'npm install -g tap-junit'
+                sh 'yarn run test | ./node_modules/tap-junit/bin/tap-junit --output output/test'
+        
             }
             post {
                 always {
-                    junit 'test/*-test.js'
+                    junit 'output/test/*.xml'
                 }
             }
 
         }
         stage('ci-test') {
             steps {
-                sh 'yarn run ci-test'
+                sh 'yarn run ci-test| ./node_modules/tap-junit/bin/tap-junit --output output/ci-test'
             }
             post {
                 always {
-                    junit 'coverage/lcov-report/*.js'
+                    junit 'output/ci-test/*.xml'
                 }
             }
 
