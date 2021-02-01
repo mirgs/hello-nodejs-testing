@@ -1,12 +1,12 @@
 #!/usr/bin/env groovy
 pipeline {
-    agent any}
+    agent any
 
     stages {
         stage('Dependencias') {
             steps {
                     sh 'yarn'
-                }
+
             }
         }
         stage('test') {
